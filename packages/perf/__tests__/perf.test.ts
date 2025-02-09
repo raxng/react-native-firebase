@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals';
+import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
 
 import perf, {
   firebase,
@@ -14,7 +14,12 @@ describe('Performance Monitoring', function () {
   describe('namespace', function () {
     beforeAll(async function () {
       // @ts-ignore
-      expect(trace._identifier).toEqual('invertase');
+      globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
+    });
+
+    afterAll(async function () {
+      // @ts-ignore
+      globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = false;
     });
 
     it('errors if identifier not a string', function () {
